@@ -1,0 +1,20 @@
+.profile__overlay-button {
+  background-color: #000;
+  background-image: url("../../../images/VectorAvatar.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  border-radius: 50%;
+  height: 120px;
+  opacity: 0;
+  position: absolute;
+  width: 120px;
+}
+
+.profile__overlay-button:hover {
+  background-size: 26px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}

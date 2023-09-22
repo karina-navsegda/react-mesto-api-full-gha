@@ -1,0 +1,14 @@
+.popup__input-error {
+  color: red;
+display: block;
+font-family: Inter,Arial,sans-serif;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+left: 50%;
+line-height: 13px;
+margin: 5px auto 0;
+position: absolute;
+transform: translateX(-50%);
+width: 83%;
+}

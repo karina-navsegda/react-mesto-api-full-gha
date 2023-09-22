@@ -1,0 +1,9 @@
+.elements__svg {
+  width: 22px;
+  height: 19px;
+  fill: #000;
+}
+
+.elements__svg:active {
+  fill: #000;
+}
