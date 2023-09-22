@@ -1,5 +1,5 @@
 /* const BASE_URL = "https://auth.nomoreparties.co"; */
-export const baseUrl = "http://localhost:3000";
+export const baseUrl = "api.karishasuper.nomoredomainsrocks.ru";
 
 const checkResponse = (res) => {
   if (res.ok) {
