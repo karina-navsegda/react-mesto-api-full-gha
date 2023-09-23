@@ -27,7 +27,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  setProfile(token, name, about) {
+  setProfile(name, about, token) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
