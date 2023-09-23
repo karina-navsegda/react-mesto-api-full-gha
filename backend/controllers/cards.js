@@ -4,7 +4,7 @@ const { default: mongoose } = require('mongoose');
 const BadRequestError = require('../errors/bad-request-error');
 const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-error');
-const Card = require('../models/card');
+const card = require('../models/card');
 
 /* module.exports.getCards = (req, res, next) => {
   Card.find({})
@@ -13,7 +13,7 @@ const Card = require('../models/card');
 }; */
 
 module.exports.getCards = (req, res, next) => {
-  Card.find({})
+  card.find({})
     .populate(['owner', 'likes'])
     .then((cards) => res.status(HTTP_STATUS_OK).send(cards))
     .catch(next);
@@ -21,7 +21,7 @@ module.exports.getCards = (req, res, next) => {
 
 module.exports.addCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({
+  card.create({
     name,
     link,
     owner: req.user._id,
@@ -44,7 +44,7 @@ module.exports.deleteCard = (req, res, next) => {
   const userId = req.user._id;
   const { cardId } = req.params;
 
-  Card.findById(cardId)
+  card.findById(cardId)
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Такой карточки нет');
@@ -59,7 +59,7 @@ module.exports.deleteCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof NotFoundError || err instanceof ForbiddenError) {
-        next(err);
+        next(new BadRequestError('Карточка не найдена'));
       } else if (err instanceof BadRequestError || err.name === 'CastError') {
         next(new BadRequestError('Неверный формат идентификатора карточки'));
       } else {
@@ -69,7 +69,7 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.addLikeCard = (req, res, next) => {
-  Card.findByIdAndUpdate(
+  card.findByIdAndUpdate(
     req.params.cardId,
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     { new: true },
@@ -89,7 +89,7 @@ module.exports.addLikeCard = (req, res, next) => {
 };
 
 module.exports.removeLikeCard = (req, res, next) => {
-  Card.findByIdAndUpdate(
+  card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } }, // убрать _id из массива
     { new: true },
