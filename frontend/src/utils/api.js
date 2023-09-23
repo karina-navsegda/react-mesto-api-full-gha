@@ -13,7 +13,7 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
@@ -22,7 +22,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
@@ -32,7 +32,7 @@ class Api {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         name: name,
@@ -46,7 +46,7 @@ class Api {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         avatar: data.avatar,
@@ -59,7 +59,7 @@ class Api {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({ name, link }),
     }).then(this._checkResponse);
@@ -69,7 +69,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
@@ -78,7 +78,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
@@ -87,7 +87,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
