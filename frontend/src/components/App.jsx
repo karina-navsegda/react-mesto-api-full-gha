@@ -184,7 +184,7 @@ function App() {
 
   function handleLogin({ password, email }) {
     auth
-      .login({ password, email })
+      .login(password, email)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setEmail(email);
@@ -202,7 +202,7 @@ function App() {
 
   function handleRegister({ password, email }) {
     auth
-    .register({ password, email })
+    .register(password, email)
       .then(res => {
         setIsSuccessed(true)
         navigate('/signin')
