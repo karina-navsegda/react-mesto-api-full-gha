@@ -41,7 +41,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  setAvatarImg(data, token) {
+  setAvatarImg(avatar, token) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: {
@@ -49,7 +49,7 @@ class Api {
         "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: avatar,
       }),
     }).then(this._checkResponse);
   }
