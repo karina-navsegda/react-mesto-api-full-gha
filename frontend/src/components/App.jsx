@@ -182,9 +182,9 @@ function App() {
     }, [isLoggedIn]) 
 
 
-  function handleLogin(loginData) {
+  function handleLogin(password, email) {
     auth
-      .login(loginData)
+      .login(password, email)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setEmail(loginData.email);

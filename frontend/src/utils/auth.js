@@ -8,23 +8,28 @@ const checkResponse = (res) => {
   return Promise.reject(res.status);
 };
 
-function login(data) {
+function login(password, email) {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      password: password,
+      email: email,
   }).then(checkResponse);
-}
+})}
 
- function register(data) {
+ function register(password, email) {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      password: password,
+      email: email,
+    })
   }).then(checkResponse);
 } 
 
