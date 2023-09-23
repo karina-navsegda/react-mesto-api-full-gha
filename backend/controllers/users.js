@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const BadRequestError = require('../errors/bad-request-error');
 const NotFoundError = require('../errors/not-found-err');
-const user = require('../models/user');
+const User = require('../models/user');
 const ConflictError = require('../errors/conflict-error');
 
 const { SECRET_KEY = 'some-secret-key' } = process.env;
@@ -16,7 +16,7 @@ module.exports.createUser = (req, res, next) => {
   } = req.body;
   bcrypt
     .hash(password, 10)
-    .then((hash) => user.create({
+    .then((hash) => User.create({
       name,
       about,
       avatar,
@@ -41,13 +41,13 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.getUser = (req, res, next) => {
-  user.find({})
+  User.find({})
     .then((users) => res.send(users))
     .catch(next);
 };
 
 module.exports.getUserId = (req, res, next) => {
-  user.findById(req.params.userId)
+  User.findById(req.params.userId)
     .orFail()
     .then((user) => {
       res.status(HTTP_STATUS_OK).send(user);
@@ -69,7 +69,7 @@ module.exports.getUserId = (req, res, next) => {
 
 module.exports.editUser = (req, res, next) => {
   const { name, about } = req.body;
-  user.findByIdAndUpdate(
+  User.findByIdAndUpdate(
     req.user._id,
     { name, about },
     { runValidators: true, new: 'true' },
@@ -95,7 +95,7 @@ module.exports.editUser = (req, res, next) => {
 
 module.exports.editAvatar = (req, res, next) => {
   if (req.user._id) {
-    user.findByIdAndUpdate(
+    User.findByIdAndUpdate(
       req.user._id,
       { avatar: req.body.avatar },
       { runValidators: true, new: true },
@@ -121,14 +121,14 @@ module.exports.editAvatar = (req, res, next) => {
 };
 
 module.exports.getUserMe = (req, res, next) => {
-  user.findById(req.user._id)
+  User.findById(req.user._id)
     .then((user) => res.status(HTTP_STATUS_OK).send(user))
     .catch(next);
 };
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  return user.findUserByCredentials(email, password)
+  return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, SECRET_KEY, {
         expiresIn: '7d',

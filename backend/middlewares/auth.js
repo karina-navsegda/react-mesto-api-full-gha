@@ -3,18 +3,14 @@ const UnauthorizedError = require('../errors/unauthorized-error');
 
 const { SECRET_KEY = 'some-secret-key' } = process.env;
 
+module.exports = (req, res, next) => {
+  const { authorization } = req.headers;
 
-  module.exports = (req, res, next) => {
-    const { authorization } = req.headers;
-
-    if (!authorization || !authorization.startsWith('Bearer ')) {
-      const error = new UnauthorizedError('Необходима авторизация');
-      error.statusCode = 401;
-      next(error);
-    } else {
-      next();
-    }
-  ;
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    const error = new UnauthorizedError('Необходима авторизация');
+    error.statusCode = 401;
+    return next(error);
+  }
 
   const token = authorization.replace('Bearer ', '');
   let payload;
@@ -29,5 +25,5 @@ const { SECRET_KEY = 'some-secret-key' } = process.env;
 
   req.user = payload; // записываем пейлоуд в объект запроса
 
-  next(); // пропускаем запрос дальше
+  return next(); // пропускаем запрос дальше
 };
