@@ -41,7 +41,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  setAvatarImg(token, data) {
+  setAvatarImg(data, token) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: {
@@ -54,7 +54,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  setCard(token, name, link) {
+  setCard(name, link, token) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: {
@@ -65,7 +65,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  addLike(token, cardId) {
+  addLike(cardId, token) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: {
@@ -74,7 +74,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  removeLike(token, cardId) {
+  removeLike(cardId, token) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: {
@@ -83,7 +83,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  deleteCard(token, cardId) {
+  deleteCard(cardId, token) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: {

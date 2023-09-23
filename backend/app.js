@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
-const { requestLogger, errorLogger } = require('./middlewares/logger')
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000, MESTODB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
@@ -36,6 +36,12 @@ mongoose.connect(MESTODB_URL, {
 
 app.use(requestLogger);
 app.use(limiter);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use('/signup', require('./routes/signup'));
 app.use('/signin', require('./routes/signin'));

@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP 51.250.31.7
 
-Frontend https://...
+Frontend https://http://karishasuper.nomoredomainsrocks.ru
 
-Backend https://...
+Backend https://api.karishasuper.nomoredomainsrocks.ru

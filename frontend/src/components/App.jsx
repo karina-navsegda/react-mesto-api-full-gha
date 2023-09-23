@@ -204,6 +204,7 @@ function App() {
     auth
     .register(password, email)
       .then(res => {
+        setIsTooltipPopupOpen(true);
         setIsSuccessed(true)
         navigate('/signin')
       })
