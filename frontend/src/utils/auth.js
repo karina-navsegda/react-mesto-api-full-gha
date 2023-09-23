@@ -17,8 +17,9 @@ function login(password, email) {
     body: JSON.stringify({
       password: password,
       email: email,
-  }).then(checkResponse);
-})}
+  })
+}).then(checkResponse);
+}
 
  function register(password, email) {
   return fetch(`${baseUrl}/signup`, {
