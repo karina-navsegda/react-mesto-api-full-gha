@@ -31,7 +31,8 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         name: name,
@@ -44,10 +45,11 @@ class Api {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
-        avatar: data,
+        avatar: data.avatar,
       }),
     }).then(this._checkResponse);
   }
@@ -56,6 +58,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({ name, link }),
