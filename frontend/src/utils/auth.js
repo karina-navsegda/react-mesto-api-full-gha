@@ -34,18 +34,6 @@ function login(password, email) {
   }).then(checkResponse);
 } 
 
-/* function register(password, email) {
-  return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      password: password,
-      email: email
-    })
-  }).then(res => checkResponse(res));
-}  */
 
 function checkToken(token) {
   return fetch(`${baseUrl}/users/me`, {

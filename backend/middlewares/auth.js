@@ -8,7 +8,6 @@ module.exports = (req, res, next) => {
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     const error = new UnauthorizedError('Необходима авторизация');
-    error.statusCode = 401;
     return next(error);
   }
 
@@ -19,7 +18,6 @@ module.exports = (req, res, next) => {
     payload = jwt.verify(token, SECRET_KEY);
   } catch (err) {
     const error = new UnauthorizedError('Необходима авторизация');
-    error.statusCode = 401;
     return next(error);
   }
 

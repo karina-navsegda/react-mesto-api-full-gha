@@ -94,30 +94,25 @@ module.exports.editUser = (req, res, next) => {
 };
 
 module.exports.editAvatar = (req, res, next) => {
-  if (req.user._id) {
-    User.findByIdAndUpdate(
-      req.user._id,
-      { avatar: req.body.avatar },
-      { runValidators: true, new: true },
-    )
-      .then((user) => {
-        res.status(HTTP_STATUS_OK).send(user);
-      })
-      .catch((err) => {
-        if (err instanceof mongoose.Error.ValidationError) {
-          next(
-            new BadRequestError(
-              `Неверный формат идентификатора пользователя: ${req.params.userId}`,
-            ),
-          );
-        } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
-          next(new NotFoundError('Пользователь не найден'));
-        }
-      });
-  } else {
-    const err = new Error('Пользователь не найден');
-    next(err);
-  }
+  User.findByIdAndUpdate(
+    req.user._id,
+    { avatar: req.body.avatar },
+    { runValidators: true, new: true },
+  )
+    .then((user) => {
+      res.status(HTTP_STATUS_OK).send(user);
+    })
+    .catch((err) => {
+      if (err instanceof mongoose.Error.ValidationError) {
+        next(
+          new BadRequestError(
+            `Неверный формат идентификатора пользователя: ${req.params.userId}`,
+          ),
+        );
+      } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
+        next(new NotFoundError('Пользователь не найден'));
+      }
+    });
 };
 
 module.exports.getUserMe = (req, res, next) => {
